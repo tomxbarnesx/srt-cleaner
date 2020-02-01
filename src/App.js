@@ -8,7 +8,7 @@ function App() {
   return (
     <div className="App">
       <h1>YouTube SRT Cleaner</h1>
-      <p>Paste in YouTube-generated .srt files and receive readable text. Happy birthday.</p>
+      <p>Paste in the text from a YouTube-generated .srt files and get back readable text. Happy birthday.</p>
       <Cleaner />
     </div>
   );
