@@ -6,7 +6,8 @@ class Cleaner extends Component {
 		super()
 		this.state = {
 			body: '',
-			result: '',
+			resultTimeCodes: [],
+			resultText: [],
 		}
 		this.handleChange = this.handleChange.bind(this)
 		this.handleSubmit = this.handleSubmit.bind(this)
@@ -22,20 +23,41 @@ class Cleaner extends Component {
     }
 
     srtCleaner = (rawText) => {
-	  let firstClean = rawText.replace(/[\n0-9,:>-]/g, "")
-	  let secondClean = firstClean.replace(/  +/g, ' ');
-	  return secondClean
+	  // let firstClean = rawText.replace(/[\n0-9,:>-]/g, "")
+	  // let secondClean = firstClean.replace(/  +/g, ' ');
+	  let timeCodes = [], 
+	  	finalText = [],
+	  	timeCodeTest = RegExp(/[\:>-]/g),
+	  	scriptTest = RegExp(/[a-z]/g),
+	  	splitText = rawText.split("\n");
+	  	console.log(splitText)
+	  for (let i=0; i < splitText.length; i++){
+	  	if (timeCodeTest.test(splitText[i])){
+	  		timeCodes.push(splitText[i])
+	  	} else if (scriptTest.test(splitText[i])) {
+	  		finalText.push(splitText[i])
+	  	}
+	  }
+	  return [timeCodes,finalText]
 	}
 
     handleSubmit = (e) => {
 		e.preventDefault();
 		let result = this.srtCleaner(this.state.body)
 		this.setState({
-			result: result
+			resultTimeCodes: result[0],
+			resultText: result[1]
 		})
 	}
 
 	render() {
+		let scriptResult = this.state.resultText.map((tb) => {
+			return (<p>{tb}</p>)
+		});
+		let timeCodes = this.state.resultTimeCodes.map((tc) => {
+			return (<p>{tc}</p>)
+		});
+
 	  	return (
 		    <div className="cleaner-master m-0">
 		    	<form onSubmit={ this.handleSubmit } className="flex flex-col flex-center">
@@ -46,7 +68,10 @@ class Cleaner extends Component {
 	            </form>
 	            <div>
 	            	<h2>Result:</h2>
-	            	<p className="left-align">{this.state.result}</p>
+	            	<div className="flex flex-row space-around">
+	            		<div>{timeCodes}</div>
+	            		<div>{scriptResult}</div>
+	            	</div>
 	            </div>
 		    </div>
 		);
