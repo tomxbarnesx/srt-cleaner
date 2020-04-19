@@ -27,7 +27,7 @@ class Cleaner extends Component {
 	  // let secondClean = firstClean.replace(/  +/g, ' ');
 	  let timeCodes = [], 
 	  	finalText = [],
-	  	timeCodeTest = RegExp(/[\:>]/g),
+	  	timeCodeTest = RegExp(/[>]/g),
 	  	scriptTest = RegExp(/[a-zA-Z]/g),
 	  	splitText = rawText.split("\n");
 	  	console.log(splitText)
@@ -68,7 +68,7 @@ class Cleaner extends Component {
 	            </form>
 	            <div>
 	            	<h2>Result:</h2>
-	            	<div className="flex flex-row space-around">
+	            	<div className="flex flex-row space-around left-align">
 	            		<div>{timeCodes}</div>
 	            		<div>{scriptResult}</div>
 	            	</div>
