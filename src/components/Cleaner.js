@@ -27,8 +27,8 @@ class Cleaner extends Component {
 	  // let secondClean = firstClean.replace(/  +/g, ' ');
 	  let timeCodes = [], 
 	  	finalText = [],
-	  	timeCodeTest = RegExp(/[\:>-]/g),
-	  	scriptTest = RegExp(/[a-z]/g),
+	  	timeCodeTest = RegExp(/[\:>]/g),
+	  	scriptTest = RegExp(/[a-zA-Z]/g),
 	  	splitText = rawText.split("\n");
 	  	console.log(splitText)
 	  for (let i=0; i < splitText.length; i++){
